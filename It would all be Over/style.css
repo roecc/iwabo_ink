@@ -89,6 +89,18 @@ h2 {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+    
+    z-index: 1;
+    pointer-events: none;
+}
+
+.outerContainer * {
+    pointer-events: auto;
+}
+
+
+.navigation {
+    z-index: 9999;
 }
 
 
@@ -315,4 +327,45 @@ body.dark {
 
 .dark #controls {
     background: black;
+}
+
+
+/*LINKS*/
+.navContainer {
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    position: absolute;
+    z-index: 99;
+    width: 100vw;
+    aspect-ratio: 2.39 / 1;
+    pointer-events: none;
+}
+
+.clickable {
+    position: absolute;
+    cursor: pointer;
+    /* Optional: visual debugging */
+    background: rgba(255, 0, 0, 0.3);
+    z-index: 9999;
+    pointer-events: all;
+  }
+
+  /* Example: Door position at 62.5% across, 66.7% down */
+.door {
+    left: 27.5%;
+    top: 12.7%;
+    width: 13%;
+    height: 60%;
+    transform: rotate(-10deg); /* rotates 15 degrees clockwise */
+    transform-origin: center;
+}
+
+.attic {
+    left: -8%;
+    top: 0%;
+    width: 28%;
+    height: 100%;
+    transform: rotate(-20deg); /* rotates 15 degrees clockwise */
+    transform-origin: center;
 }
