@@ -136,6 +136,11 @@
                     customClasses.push(splitTag.val);
                 }
 
+                // CUSTOM
+                else if( splitTag && splitTag.property == "LOADAREAS" ) {
+                    loadClickableAreas(splitTag.val.trimStart());
+                }
+
                 // CLEAR - removes all existing content.
                 // RESTART - clears everything and restarts the story from the beginning
                 else if( tag == "CLEAR" || tag == "RESTART" ) {
