@@ -12,7 +12,12 @@ He starts, as if woken from a nightmare. He hunches over, buries his face in his
 -> END
 
 === Hallway ===
-You are now in the Hallway by Button!
+You are now in the Hallway by Button! 
+this is great
+isnt it?
+just wasting space
+like i always do
+hurray!
 -> DONE
 
 === AprilsRoom ===

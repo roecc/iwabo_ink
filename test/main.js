@@ -1,8 +1,7 @@
 (function(storyContent) {
 
     // Create ink story from the content using inkjs
-    //var story = new inkjs.Story(storyContent);
-    window.story = new inkjs.Story(storyContent);
+    var story = new inkjs.Story(storyContent);
 
     var savePoint = "";
 
@@ -29,15 +28,10 @@
                 var byline = document.querySelector('.byline');
                 byline.innerHTML = "by "+splitTag.val;
             }
-
-            // author: Your Name
-            else if( splitTag && splitTag.property == "alert" ) {
-                alert(splitTag.val);
-            }
         }
     }
 
-    window.storyContainer = document.querySelector('#story');
+    var storyContainer = document.querySelector('#story');
     var outerScrollContainer = document.querySelector('.outerContainer');
 
     // page features setup
@@ -246,7 +240,6 @@
             scrollDown(previousBottomEdge);
 
     }
-    window.continueStory = continueStory;
 
     function restart() {
         story.ResetState();
@@ -309,6 +302,24 @@
             if( t < 1 ) requestAnimationFrame(step);
         }
         requestAnimationFrame(step);
+    }
+
+    // The Y coordinate of the bottom end of all the story content, used
+    // for growing the container, and deciding how far to scroll.
+    function contentBottomEdgeY() {
+        var bottomElement = storyContainer.lastElementChild;
+        return bottomElement ? bottomElement.offsetTop + bottomElement.offsetHeight : 0;
+    }
+
+    // Remove all elements that match the given selector. Used for removing choices after
+    // you've picked one, as well as for the CLEAR and RESTART tags.
+    function removeAll(selector)
+    {
+        var allElements = storyContainer.querySelectorAll(selector);
+        for(var i=0; i<allElements.length; i++) {
+            var el = allElements[i];
+            el.parentNode.removeChild(el);
+        }
     }
 
     // Used for hiding and showing the header when you CLEAR or RESTART the story respectively.
@@ -426,40 +437,3 @@
     }
 
 })(storyContent);
-
-function test(knot) {
-    // Remove all existing choices
-    removeAll(".choice");
-
-    // Tell the story where to go next
-    story.ChoosePathString(knot);
-
-    // This is where the save button will save from
-    savePoint = story.state.toJson();
-
-    continueStory();
-
-    // Extend height to fit
-    // We do this manually so that removing elements and creating new ones doesn't
-    // cause the height (and therefore scroll) to jump backwards temporarily.
-    storyContainer.style.height = contentBottomEdgeY()+"px";
-}
-
- // The Y coordinate of the bottom end of all the story content, used
-// for growing the container, and deciding how far to scroll.
-function contentBottomEdgeY() {
-    console.log(storyContainer.lastElementChild);
-    var bottomElement = storyContainer.lastElementChild;
-    return bottomElement ? bottomElement.offsetTop + bottomElement.offsetHeight : 0;
-}
-
-// Remove all elements that match the given selector. Used for removing choices after
-// you've picked one, as well as for the CLEAR and RESTART tags.
-function removeAll(selector)
-{
-    var allElements = storyContainer.querySelectorAll(selector);
-    for(var i=0; i<allElements.length; i++) {
-        var el = allElements[i];
-        el.parentNode.removeChild(el);
-    }
-}
