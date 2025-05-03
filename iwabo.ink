@@ -2,6 +2,8 @@
 
 INCLUDE Act I/Day1.ink
 INCLUDE Act I/navigation.ink
+INCLUDE oldNav/Day1.ink
+
 
 VAR day = 1
 VAR location = "bedroom"
