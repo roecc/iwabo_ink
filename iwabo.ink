@@ -1,4 +1,3 @@
-# alert: this works!
 # author: p.b.slinger
 
 INCLUDE Act I/Day1.ink
