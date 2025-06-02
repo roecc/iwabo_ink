@@ -38,7 +38,13 @@ var delayTime = 200.0;
 
     // page features setup
     setupTheme(globalTagTheme);
-    var hasSave = loadSavePoint();
+
+    //prioritise loading save state from URL, then from localStorage
+    var hasSave = loadFromURL();
+    if (!hasSave){
+        var hasSave = loadSavePoint();
+    }
+
     setupButtons(hasSave);
 
     // Set initial save point
@@ -369,6 +375,21 @@ var delayTime = 200.0;
         return false;
     }
 
+    // Loads save state if exists in URL
+    function loadFromURL() {
+        const params = new URLSearchParams(window.location.search);
+        if (params.has("state")) {
+            let stateJson = decodeURIComponent(params.get("state"));
+            try {
+                story.state.LoadJson(savedState);
+                return true;
+            } catch (e) {
+                console.debug("Couldn't load save state");
+            }
+            return false;
+        }
+    }
+
     // Detects which theme (light or dark) to use
     function setupTheme(globalTagTheme) {
 
@@ -444,4 +465,8 @@ function getVar (varStr) {
     let storyVar = story.variablesState[varStr];
     alert(storyVar);
     return storyVar;
+}
+
+function getInkSaveState () {
+    return window.story.state.toJson();
 }

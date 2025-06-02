@@ -12,7 +12,115 @@
 </head>
 
 <body>
+    <style>
+        #feedback-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: #333;
+            color: white;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #feedback-drawer {
+            position: fixed;
+            top: 0;
+            left: -32%;
+            width: 30%;
+            height: 100%;
+            background: #f9f9f9;
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            transition: left 0.3s ease;
+        }
+
+        #feedback-drawer.open {
+            left: 0;
+        }
+
+        #feedback-close {
+            background: none;
+            border: none;
+            color: #555;
+            font-size: 20px;
+            padding: 10px;
+            text-align: right;
+            align-self: flex-end;
+            cursor: pointer;
+        }
+
+        #form-container iframe {
+            flex: 1;
+            width: 100%;
+            border: none;
+        }
+
+        #form-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+
+        <!-- Toggle Button -->
+    <button id="feedback-toggle">Give Feedback</button>
+
+        <!-- Feedback Drawer -->
+    <div id="feedback-drawer">
+        <button id="feedback-close" title="Close">✕</button>
+        <div id="form-container"></div>
+    </div>
+
+    <script>
+        const drawer = document.getElementById("feedback-drawer");
+        const toggleBtn = document.getElementById("feedback-toggle");
+        const closeBtn = document.getElementById("feedback-close");
+        const formContainer = document.getElementById("form-container");
+
+        // Replace with your actual Ink save export function
+        function getInkSaveState() {
+            // Example dummy state - replace with your real game state export
+            const dummyState = {
+            paragraph: "bunker/lights_off",
+            variables: { trust: 3, hunger: 0.2, flashlight: true }
+            };
+            return encodeURIComponent(JSON.stringify(dummyState));
+        }
+
+        // Construct Google Form URL with pre-filled hidden field
+        function buildFormURL() {
+            const saveState = getInkSaveState();
+            console.log("Encoded save state:", saveState);
+            const entryId = "entry.1991091236";
+            const formBase = "https://docs.google.com/forms/d/e/1FAIpQLSeyyWDmvly7Yzmyjc9QmzsGxWOctKxZe-l-3liiSauVmQz92Q/viewform";
+            return `${formBase}?usp=pp_url&${entryId}=${saveState}`;
+        }
+
+        // Open drawer and load form (only once)
+        function openDrawer() {
+            if (!formContainer.innerHTML) {
+            const iframe = document.createElement("iframe");
+            iframe.src = buildFormURL();
+            iframe.allowFullscreen = true;
+            formContainer.appendChild(iframe);
+            }
+            drawer.classList.add("open");
+        }
+
+        toggleBtn.addEventListener("click", openDrawer);
+        closeBtn.addEventListener("click", () => drawer.classList.remove("open"));
+    </script>
+
+    <!--
+
     <button style="z-index: 9999; position: absolute; top: 2em" onclick="getVar('skillCount'); getVar('dressed')">Show SkillCount</button>
+    -->
     <div class="outerContainer">
         <h3 class="written-in-ink">IT WOULD ALL BE OVER - <a href="https://www.inklestudios.com/ink">WRITTEN IN INK</a></h3>
 
