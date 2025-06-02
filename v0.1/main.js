@@ -366,6 +366,7 @@ var delayTime = 200.0;
         try {
             let savedState = window.localStorage.getItem('save-state');
             if (savedState) {
+            console.log("Loading save state from file", savedState);
                 story.state.LoadJson(savedState);
                 return true;
             }
@@ -377,17 +378,21 @@ var delayTime = 200.0;
 
     // Loads save state if exists in URL
     function loadFromURL() {
-        const params = new URLSearchParams(window.location.search);
-        if (params.has("state")) {
-            let stateJson = decodeURIComponent(params.get("state"));
-            try {
-                story.state.LoadJson(savedState);
-                return true;
-            } catch (e) {
-                console.debug("Couldn't load save state");
+        try {
+            const params = new URLSearchParams(window.location.search);
+            if (params.has("state")) {
+                const stateJson = decodeURIComponent(params.get("state"));
+                if (stateJson) {
+                    console.log("Loading save state from URL", stateJson);
+                
+                    story.state.LoadJson(stateJson);
+                    return true;
+                }
             }
-            return false;
+        } catch (e) {
+            console.debug("Couldn't load save state from URL");
         }
+        return false;
     }
 
     // Detects which theme (light or dark) to use
