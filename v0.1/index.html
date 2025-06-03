@@ -109,13 +109,18 @@
 
         // Open drawer and load form (only once)
         function openDrawer() {
-            if (!formContainer.innerHTML) {
-            const iframe = document.createElement("iframe");
-            iframe.src = buildFormURL();
-            iframe.allowFullscreen = true;
-            formContainer.appendChild(iframe);
+            const isOpen = drawer.classList.contains("open");
+            if (!isOpen) {
+                if (!formContainer.innerHTML) {
+                const iframe = document.createElement("iframe");
+                iframe.src = buildFormURL();
+                iframe.allowFullscreen = true;
+                formContainer.appendChild(iframe);
+                }
+                drawer.classList.add("open");
+            } else {
+                drawer.classList.remove("open")
             }
-            drawer.classList.add("open");
         }
 
         toggleBtn.addEventListener("click", openDrawer);
