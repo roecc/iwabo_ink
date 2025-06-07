@@ -2,6 +2,7 @@ VAR dressed = false
 VAR brushedTeeth = false
 VAR interruptedApril = false
 VAR listenedApril = false
+VAR sawJune = false
 
 === Start ===
 You start, as if from a nightmare but quickly settle yourself. You sit up at the edge of the bed, hunched forward, your face buried in your hands before they slide down, folding below your chin.
@@ -14,11 +15,11 @@ The rooms decor is rugged yet modern and orderly almost to a fault. Everything h
 === Bedroom ===
 + {not dressed}[clothes on the chair]
     A stack of neatly folded clothes greets you.
-    **[get dressed]
+    ++[get dressed]
         You put on the white Tee, flanel shirt and worn jeans.
         ~ dressed = true
         ->Bedroom
-    **[leave]
+    ++[leave]
         ~ dressed = false
         ->Bedroom
 +[cardboard box]
@@ -30,7 +31,7 @@ The rooms decor is rugged yet modern and orderly almost to a fault. Everything h
     You enter the bathroom.
     ->Bathroom
 ->Bedroom
-+[hallway]
++[go to hallway]
 {skillCount==0:
     As you walk toward the door, you stub your toe on the carton.
     ++[yell at the carton]
@@ -66,51 +67,90 @@ You are now in the Hallway. The door to APRIL's room is ajar, sunlight falling t
     You return to your bedroom.
     ->Bedroom
 + [go to April's room]
-    {not interruptedApril:
-        # IMAGE: Assets/Images/Act1/Moss_Guitar.jpg
-        The room is bathed in warm sunlight filtered through the red of a bedsheet draped across the open window framed by potted plants. A cool summer breze makes it dance to the melodies produced by the guitar in the hands of the red haired young girl sitting on her Bed. Her phone propped up before her. When she notices you, she glances up with a shy smile. Without interruption her playing continues.
-    - else:
-        You enter April's room.
-    }
     ->AprilsRoom
-    
++ [go downstairs]
+    ->LivingRoom
+
+
+
+//APRILS ROOM
 
 === AprilsRoom ===
-
-* {not interruptedApril} [just listen]
-    You stand in the doorframe for some time. After a while, she lets the last note of her guitar ring out and silence falls over the room like a blanket, leaving the space to the rustling of the leaves and occasional chirping of a bird from outside the window. April sinks into herself for a moment, then leans forward and stops the recoring on her phone. She turns to you with a sleepy smile, wishing you a good morning.
-    ~ listenedApril = true
-    ->AprilsRoom
-* ask her what she is playing
-    { not listenedApril: ->Interrupted }
-    "It's nothing in particular."
-    ->AprilsRoom
-* complement her playing
-    { not listenedApril: ->Interrupted }
-    "Thank you."
-    ->AprilsRoom
-* ask what's for breakfast
-    { not listenedApril: ->Interrupted }
-    "How should I know?"
-    "Smells like pancakes to me."
-    ->AprilsRoom
-    
+{not interruptedApril: 
+    {not listenedApril: -> PlayingGuitar}
+}
+You enter April's room.
 + [leave]
     You return to the Hallway.
     ->Hallway
+    
+= PlayingGuitar
+# IMAGE: Assets/Images/Act1/Moss_Guitar.jpg
+The room is bathed in warm sunlight filtered through the red of a bedsheet draped across the open window framed by potted plants. A cool summer breze makes it dance to the melodies produced by the guitar in the hands of the red haired young girl sitting on her Bed. Her phone propped up before her. When she notices you, {dressed: she glances up with a shy smile. Without interruption her playing continues.} {not dressed: ->GetDressedDaryl}
+{not dressed: 
+    //# IMAGE: Assets/Images/Act1/Moss_Embarrasing.jpg
+    ~ interruptedApril = true
+    + [I guess I better go get dressed.] -> Hallway
+}
+{dressed: 
+    -> PlayingGuitar2
+}
+
+= PlayingGuitar2 
+* {not interruptedApril} [just listen]
+    You stand in the doorframe for some time. After a while, she lets the last note of her guitar ring out and silence falls over the room like a blanket, leaving the space to the rustling of the leaves and occasional chirping of a bird from outside the window. April sinks into herself for a moment, then leans forward and stops the recoring on her phone. She turns to you with a sleepy smile, wishing you a good morning.
+    ~ listenedApril = true
+    -> PlayingGuitar2
++ ask her what she is playing
+    { not listenedApril: 
+        {not interruptedApril: ->Interrupted}
+        {interruptedApril: -> InterruptedForThat}
+    }
+    "It's nothing in particular."
+    -> PlayingGuitar2
++ complement her playing
+    { not listenedApril: 
+        {not interruptedApril: ->Interrupted}
+        {interruptedApril: -> InterruptedForThat}
+    }
+    "Thank you."
+    -> PlayingGuitar2
++ ask what's for breakfast
+    { not listenedApril: 
+        {not interruptedApril: ->Interrupted}
+        {interruptedApril: -> InterruptedForThat}
+    }
+    "How should I know?"
+    "Smells like pancakes to me."
+    -> PlayingGuitar2
++ [leave] -> Hallway
 
 = Interrupted
-    ~ interruptedApril = true
-    As you begin to speak she glares at you, putting her palm to the strings. she picks up the phone, turns it off and tosses it on her bed. 
-    "Dad, I was recording that..."
-    "what do you want?"
-    ->AprilsRoom
+~ interruptedApril = true
+As you begin to speak she glares at you, putting her palm to the strings. she picks up the phone, turns it off and tosses it on her bed. 
+"Dad, I was recording that..."
+"what do you want?"
+-> PlayingGuitar2
 
 
+= InterruptedForThat
+"Really? You interrupted me for that?"
+-> InterruptedForThat2
 
+= InterruptedForThat2
+ * Apologize
+    She sighs.
+    "It's alright."
+    ->InterruptedForThat2
+ * [leave] -> Hallway
+ 
+ = GetDressedDaryl
+ "What are you doing?!" She theatrically throws the guitar onto her bed. She yells in an accusatory tone as she walks toward you "Put on some clothes!". She tosses her head back, slouching her shoulders as she reaches out to the door before slamming it shut with the words "You are so embarrassing!" and a decidedly teenage grumbling through gritted teeth. 
+//# IMAGE: Assets/Images/Act1/Moss_Embarrasing.jpg
+~ interruptedApril = true
++ [I guess I better go get dressed.] -> Hallway
 
-
-
-
+== LivingRoom
+[END]
 
 
