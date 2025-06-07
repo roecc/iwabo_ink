@@ -6,6 +6,7 @@ VAR hunter = false
 VAR paranoid = false
 VAR sales = false
 VAR christian = false
+VAR tinkerer = false
 
 === Carton ===
 *[read first letter]
@@ -35,6 +36,8 @@ SkillCount is {skillCount}
 {paranoid: You are Paranoid}
 {sales: You are a Salesman}
 {christian: You are a Christian}
+{tinkerer: You are a Tinkerer}
+
 + Deer Antler
     Sharp eyes and sharper instincts. It's hunt or be hunted.
     ++{not hunter}[keep]
@@ -83,8 +86,20 @@ SkillCount is {skillCount}
         }
         ~ christian = false
         ->Contents
++ Roll of Duct-Tape
+    It's almost out. The end of the strip is folded in on itself for easy use. You used to walk around with this thing an entire Summer, insisting that the day would come that you would need it.
+    ++{not tinkerer}[keep]
+        ~ tinkerer = true
+        ~ skillCount += 1
+        ->Contents
+    ++[put back]
+        {tinkerer: 
+            ~ skillCount -= 1
+        }
+        ~ tinkerer = false
+        ->Contents
 + [close carton]
-    { skillCount < minSkill:
+    { skillCount <= minSkill:
         I should get this over with now.
         ->Contents
         - else:
