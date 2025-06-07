@@ -151,6 +151,6 @@ As you begin to speak she glares at you, putting her palm to the strings. she pi
 + [I guess I better go get dressed.] -> Hallway
 
 == LivingRoom
-[END]
+->END
 
 
