@@ -4,6 +4,18 @@ VAR interruptedApril = false
 VAR listenedApril = false
 VAR sawJune = false
 
+
+//# AUDIOLOOP ./Assets/Music/IWABO_trailer_Fpaoles_track v1_Loop3
+
+=== Intro ===
+INT. BEDROOM - MORNING
+From the right, warm sunlight falling through the half closed shutters above the king-size bed. Gentle guitar music eminates from down the hall, and the smell of pancakes wafting from the kitchen below. 
+
+UI - On the left side of the screen large, bold letters hang in the air: 
+
+* "Start"
+    ->Start
+
 === Start ===
 You start, as if from a nightmare but quickly settle yourself. You sit up at the edge of the bed, hunched forward, your face buried in your hands before they slide down, folding below your chin.
 
