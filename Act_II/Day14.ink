@@ -80,28 +80,22 @@ There really isn't much to do but sit and
     It's been a while since time has felt real, but it seems silly to question its existance now that it has so rudely come to a screetching halt. 
     Deafening silence envelops you.
     **...
-        ***...
-            There! June just turned her head a little!
-            ****...
-                *****::Discipline Check, Medium
-                    ******Success
-                        *******...
-                            (Discipline++)
-                            After what feels like eons, 
-                            ->D14_SittingByJune2
-                    ******Failure
-                        (Discipline++)
-                        You start ripping the corners of the nearby notebook, bunching them up between your fingers and flicking them towards Mary-Anns open mouth.
-                        It's not an easy shot.
-                        But you have time.
-                        Inevitably, the law of large numbers holds:
-                        *******Bull's Eye!
-                            Mary-Ann chokes on and promptly spits out the little paper ball which joins the many, many others surrounding and completely covering her and the blanket of your bedridden daughter.
-                            She takes a sharp breath, but before she can say anything, June gives a sigh, pause and loses herself in laughter.
-                            (June Mood++)
-                            Mary-Ann gives you a stern look, and begins brushing the paper balls down, oblivious to the ones in her hair.
-                            ->D14A2
-                        //And Mary-Ann, now surrounded by and completely covered in little paper balls, 
+    --
+    **...
+    --
+    There! June just turned her head a little!
+    **...
+        ***::Discipline Check, Medium
+            ****Success
+                *****...
+                    (Discipline++)
+                    After what feels like eons, 
+                    ->D14_SittingByJune2
+            ****Failure
+                (Discipline++)
+                ->D14_PaperBalls
+        ***"Yup, I'm Bored."
+            ->D14_PaperBalls
                         
     
 *pray.
@@ -118,6 +112,18 @@ Tired eyes, gentle smile.
 (Mary-Ann mood++)
 ->D14A2
 
+= D14_PaperBalls
+You start ripping the corners of the nearby notebook, bunching them up between your fingers and flicking them towards Mary-Anns open mouth.
+    It's not an easy shot.
+    But you have time.
+    Inevitably, the law of large numbers holds:
+    *Bull's Eye!
+        Mary-Ann chokes on and promptly spits out the little paper ball which joins the many, many others surrounding and completely covering her and the blanket of your bedridden daughter.
+        She takes a sharp breath, but before she can say anything, June gives a sigh, pause and loses herself in laughter.
+        (June Mood++)
+        Mary-Ann gives you a stern look, and begins brushing the paper balls down, oblivious to the ones in her hair.
+        ->D14A2
+    //And Mary-Ann, now surrounded by and completely covered in little paper balls, 
 //replace this with a redirect based on var? {->D14#Actions}
 === D14A2 ===
 You get up, walk the bunker and...
