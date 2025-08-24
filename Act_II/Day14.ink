@@ -1,3 +1,5 @@
+VAR JuneBurnt = false
+
 === Day14 ===
 You wake up alone in your bed, staring at the concrete dome you call home for a while. The other side of the bed - cold as usual these days.
 ->D14A1
@@ -201,9 +203,12 @@ J: Look! I made you something!
 Its a crude childs drawing of April and June, and a guitar on a green floor. Little nametags float above them designating them so.
 A: Wow! Is that us?
 J: Mom helped me label it! 
-A: I could barely tell!
+A: I almost couln't tell!
 Mary-Ann frowns
 A brief pause, April's eyes darting to Mary-Ann, as if to confirm she is still there.
+*give April an encouraging nod
+*...
+-
 A: I made you something, too.
 M: Oh great, another one..
 June tries to look up again
@@ -225,7 +230,7 @@ She rips the blanket down, looking up at April. Mary-Ann looks on in jealousy. S
 M: Aie! June!
 J: Sorry I-
 M: Okay, enough! April, leave. 
-M: And take this insult with you!
+M: And take this.. insult with you!
 Mary-Ann tosses the painting in Aprils direction.
 A: Insult?!
 M: To waste your talent on something so facile!
@@ -237,7 +242,6 @@ A: When was the last time you even picked up anything but a red ball-pen?
 M: I've given everything for you!
 M: Only for you to mock me!
 A: Mock-?!
-
 M: And to mock your sister!
 A: Wha-
 M: What? You think she's stupid?
@@ -264,16 +268,60 @@ M: Get out!
 April tries again to help June
 M: DÉGAGE!!
 April, genuinely surprised at the ferocity of her mothers anger, hesitates a moment, wipes away a tear and first walks, then runs out of the room.
+*help June
+    as you approach, Mary-Ann whirls around and starts telling you off.
+    June's crying gets louder and is punctuated by a scream which finally snaps Mary-Ann out of it.
+    ~ JuneBurnt = true
+//*go after April
+*...
+-
 Mary-Ann whips around and lifts June out of her boiling hot coccoon, Mary-Ann's knees and forearms turning a blistering red.
 She rushes June to the shower and cools her down, crying, apologizing, trying to tell her it will be okay.
-
+->D14A4
 
 
 ->END
 
 //Picking up the pieces
 === D14A4 ===
+You pace the bunker and find..
+*Mary-Ann, sitting on the shower floor, trying to console June
+{JuneBurnt:
+    Her whole body shaking she tries to run as much water over the large red blots on Junes legs and stomach as she can.
+    **   Let me see.
+        ->D14A4_Burns
+- else:
+    M: It could have been much worse.
+    M: The water mostly didn't make it through the layers of blankets.
+    M: Actually looks like I took the worst of it.
+}
+-
+* (ma_burns) Look sat Mary-Anns burns.
+    M: I shouldn't have kneeled on the bed.
+    **   Let.->D14A4_Burns
+    **   That was pretty dumb..
+        ***  but you got our girl out of there,
+        and that's what matters.
+        ***  maybe don't do that again.
+    ---
+--
+
 ->D14A5
+
+= D14A4_Burns
++::asc Smother::
+    ++FAILURE
+        These look pretty gnarly. Better make sure.
+        You apply cold compresses against the burn wounds.
+        (-1 FirstAid)
+    ++SUCCESS
+        Doesn't seem to have gotten beyond the first layer.
+        You should be good with a couple of compresses.
+    --
+-
+->D14A4.ma_burns
+//->D14A5
+
 
 //Bedtime?
 === D14A5 ===
